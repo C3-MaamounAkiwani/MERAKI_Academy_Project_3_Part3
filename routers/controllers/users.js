@@ -1,5 +1,8 @@
 const users = require("../../db/models/users");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
+
 
 const createNewAuthor = (req, res) => {
     const { firstName, lastName, age, country, email, password, role } = req.body;
@@ -46,17 +49,8 @@ const login = function(req, res) {
             });
         }
         const validPassword = await bcrypt.compare(password, result.password);
-        /// console.log(validPassword);
         if (validPassword) {
-            res.json("valid");
-        } else {
-            res.status(403);
-            res.json({
-                sussess: false,
-                message: `The password you’ve entered is incorrect`
-            });
-            /*
-                 const payload = {
+            const payload = {
                 userId: result._id,
                 country: result.country,
             };
@@ -64,41 +58,19 @@ const login = function(req, res) {
             const options = {
                 expiresIn: "60m",
             };
-
-
             const token = jwt.sign(payload, SECRET, options);
-
             res.status(200).json({
+                sussess: true,
                 message: "Email and Password are correct",
                 token: token
-            }); */
+            });
+        } else {
+            res.status(403);
+            res.json({
+                sussess: false,
+                message: `The password you’ve entered is incorrect`
+            });
         }
     });
 }
 module.exports = { createNewAuthor, login };
-
-
-/*
-       try {
-            const vaild = bcrypt.compare(password, result.password);
-            console.log(vaild);
-            if (!vaild) {
-                res.status(404).json("password error");
-            } else {
-                const payload = {
-                    userId: result._id,
-                    country: result.name,
-                };
-
-                const SECRET = process.env.SECRET;
-                const options = {
-                    expiresIn: "60m",
-                };
-
-                const token = jwt.sign(payload, SECRET, options);
-
-                res.status(200).json({ message: " you logged in", token: token });
-            }
-        } catch (error) {
-            res.json(error);
-        } */
