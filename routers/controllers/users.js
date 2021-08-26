@@ -2,7 +2,7 @@ const users = require("../../db/models/users");
 const bcrypt = require('bcrypt');
 
 const createNewAuthor = (req, res) => {
-    const { firstName, lastName, age, country, email, password } = req.body;
+    const { firstName, lastName, age, country, email, password, role } = req.body;
 
     const newUser = new users({
         firstName,
@@ -11,6 +11,7 @@ const createNewAuthor = (req, res) => {
         country,
         email,
         password,
+        role,
     });
 
     newUser
