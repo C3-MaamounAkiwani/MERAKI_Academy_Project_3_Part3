@@ -1,7 +1,7 @@
 const express = require("express");
 const {
     createNewAuthor,
-    login
+    login,
 } = require('../controllers/users');
 
 const userRouter = express.Router();
