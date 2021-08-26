@@ -9,6 +9,7 @@ const createNewRole = (req, res) => {
     newroles
         .save()
         .then((roles) => {
+            /// consle.log(req.body.role);
             if (roles) {
                 res.status(201);
                 res.json({
