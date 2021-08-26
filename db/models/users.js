@@ -9,6 +9,7 @@ const user = new mongoose.Schema({
     country: { type: String },
     email: { type: String, unique: true },
     password: { type: String },
+    role: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
 });
 
 
