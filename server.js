@@ -8,6 +8,7 @@ const articleRouter = require('./routers/routes/articles');
 const roleRouter = require('./routers/routes/roles');
 const bcrypt = require("bcrypt");
 const app = express();
+require("dotenv").config();
 app.use(express.json());
 
 
