@@ -20,8 +20,6 @@ articlesRouter.get("/articles/search_2", getAnArticleById);
 articlesRouter.put("/articles/:id", updateAnArticleById)
 articlesRouter.delete("/articles/:id", deleteArticleById);
 articlesRouter.delete("/articles", deleteArticlesByAuthor);
-///articlesRouter.post("/articles/:id/comments", createNewComment)
-
-
+articlesRouter.post("/articles/:id/comments", createNewComment)
 
 module.exports = articlesRouter;

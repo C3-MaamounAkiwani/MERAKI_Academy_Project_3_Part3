@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require("dotenv").config();
 
-
 const createNewAuthor = (req, res) => {
     const { firstName, lastName, age, country, email, password, role } = req.body;
 
@@ -40,7 +39,7 @@ const createNewAuthor = (req, res) => {
 
 const login = function(req, res) {
     const { email, password } = req.body;
-    users.findOne({ email: email }).then(async(result) => {
+    users.findOne({ email: email }).populate("role", "-_id").then(async(result) => {
         if (!result) {
             res.status(404);
             res.json({
@@ -53,6 +52,10 @@ const login = function(req, res) {
             const payload = {
                 userId: result._id,
                 country: result.country,
+                role: {
+                    role: result.role,
+                    permissions: result.permissions,
+                }
             };
             const SECRET = process.env.SECRET;
             const options = {

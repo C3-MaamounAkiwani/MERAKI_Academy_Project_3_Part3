@@ -1,5 +1,4 @@
-/**
- * const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 const comment = new mongoose.Schema({
     comments: { type: String },
@@ -7,4 +6,3 @@ const comment = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("comment", comment);
- */
