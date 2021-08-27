@@ -1,6 +1,7 @@
 const express = require("express");
 const createNewComment = require("../controllers/comments");
 const articles = require("../../db/models/articles");
+const { authentication } = require("../miiddelware/authentication");
 const {
     createNewArticle,
     getAllArticles,
@@ -20,6 +21,6 @@ articlesRouter.get("/articles/search_2", getAnArticleById);
 articlesRouter.put("/articles/:id", updateAnArticleById)
 articlesRouter.delete("/articles/:id", deleteArticleById);
 articlesRouter.delete("/articles", deleteArticlesByAuthor);
-articlesRouter.post("/articles/:id/comments", createNewComment)
+articlesRouter.post("/articles/:id/comments", authentication, createNewComment)
 
 module.exports = articlesRouter;
